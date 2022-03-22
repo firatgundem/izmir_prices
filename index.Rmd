@@ -1,30 +1,256 @@
 ---
-title: "index"
+title: "Acik Yonetisim Verisi (Open Government Data, OGD) Uygulamalari ve Izmir'de Yerel Fiyatlar"
 author: "Firat Gundem"
-date: "3/22/2022"
-output: html_document
+date: "3/20/2022"
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE) 
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r message=FALSE, warning=FALSE}
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(XML)
+library(rjson)
+library(jsonlite)
+library(readr)
+library(tm)
+library(lubridate)
+library(plotly)
+library(htmlwidgets)
+library(readxl)
 ```
 
-## Including Plots
+# Acik Yonetisim Verisi (Open Government Data)
 
-You can also embed plots, for example:
+Bu kisa bilgi notunda sizlere ulkemizdeki yerel yonetimleri de ilgilendiren Acik Yonetisim Verisi (Open Government Data, OGD) politikalarindan ve uygulamalarindan bahsedecegim. Acik Yonetisim Verisi uygulamalari ABD Baskani Barack Obama'nin 2009 yilinda, Beyaz Ev'de gecirdigi ilk gununde imzaladigi Seffaflik ve Acik Yonetisim Yasasina (Memorandum on Transparency and Open Government) dayanmaktadir. Seffaflik, kamusal katilim ve isbirligi gibi kavramlar uzerine yukselen Acik Yonetisim Verisi yasasi kisaca daha once gorulmemis boyutlarda verinin (data) kisisel bilgilerden arindirilarak yurttaslarin erisimine acilmasi olarak ozetlenebilir. Acik Yonetisim Verisi uygulamalarinin arkasinda yatan mantik soz konusu verilerin, yurttaslar ile yerel ve genel kamu otoriteleri arasinda karsilikli iletisimi kuvvetlendirmesi ve otoritelerin uyguladiklari politikalarda veri araciligiyla yurttas katiliminin artirilmasidir. Tabi beklenen etkinin ortaya cikmasi icin verinin nasil paylasilacagi onemlidir. Acik Yonetisim Verisi uygulamalarinin basariya ulasabilmesi icin verilerin bazi ozellikleri tasimasi gerekmektedir. 2009 yilinda Acik Yonetisim Calisma Grubu'na gore Acik Veri asagidaki ozellikleri tasimali:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+#### 1- Tam olmali (complete);
+#### 2- Oncelikli/Temel olmali (primary);
+#### 3- Guncel olmali (timely);
+#### 4- Erisilebilir olmali (accesible);
+#### 5- Makineler (bilgisayar vb.) tarafindan islenebilir olmali (machine-processable);
+#### 6- Ayrimci nitelikte olmamali (non-discriminatory);
+#### 7- Telif ile korunmamali, patentsiz olmali (non-proprietary);
+#### 8- Lisanssiz (bedava) olmali (licence-free);
+ 
+Amerika'daki Acik Yonetisim Verisi uygulamalari kisa surede dunya capinda yayginlik kazandi. Hem ulusal hem de yerel bazda kamu otoriteleri Acik Veri Portallari (Open Data Portal) araciligiyla akliniza gelebilecek pek cok veriyi kamuya actilar. Soz konusu uygulamalarin dunya capindaki yayilimini gormek icin asagidaki harita bir fikir vermektedir. 
+
+![Sekil 1: Dunyada Acik Yonetisim Verisi](C:/Users/firat/Desktop/Izmir_fiyatlar/figure1.png)
+
+Bununla beraber Acik Yonetisim Verisi uygulamalarindan beklenen etkinin ortaya cikabilmesi icin paylasilan verinin formati onem kazaniyor. Yukarida da bahsedilen 4., 7., ve 8. maddeler veri  formatinin tasimasi gereken ozellikleri ozetliyor. Bu cercevede indirilen verinin tamamen lisans gerektirmeyen yazilimlar (Python, R, UnixShell, vb.) araciligiyla islenebilir olmasi gerekiyor. Sekil 2 ABD'de Acik Yonetisim Verisi uygulamalari baglaminda paylasilan verilerin formatlarina dair bizlere bir fikir veriyor.
+
+![Sekil 2: Acik Yonetisim Veri Formatlari](C:/Users/firat/Desktop/Izmir_fiyatlar/figure2.png)
+
+Sekil 2'den de goruldugu gibi OGD kapsaminda paylasilan verilerin buyuk cogunlugunu .csv, .json, .xml gibi lisans gerektirmeyen, bedava (free) formatlar olusturuyor. Bu gorsel, OGD'den beklenen etkinin ortaya cikmasi icin gosterilen ozene bir kanit sunuyor. Bugun gerek ABD'de, gerekse de Avrupa'da OGD uygulamalari neticesinde yurttaslar, universiteler ve yerel ve kamu otoritelerinin isbirligine dayali pek cok gelisme yasaniyor. Bu gelismeler kentsel sorunlar icin acik veriye dayali cozumlerden yurttaslar tarafindan gelistirilen veri bazli uygulamalarin acik veri portallarinda paylasilmasina, acik verilerin universiteler tarafindan Buyuk Veri (Big Data) ve Makine Ogrenmesi (Machine Learning) ugulamalari icin kullanilmasina kadar genis bir alana yayiliyor. Dolayisiyla OGD uygulamalari veri bazli politika ve veri bilimi acisindan genis bir potansiyeli bunyesinde barindiriyor. 
+
+# Turkiye'de Acik Yonetisim Verisi ve Uygulamalari
+
+Turkiye'de de ciliz sayilabilecek bazi OGD uygulamalarindan bahsetmek mumkun. Cumhurbaskanligi bunyesinde kurulan Dijital Donusum Ofisi Acik Veri politikalarinin Turkiye'deki uygulamasindan sorumlu. Ote yandan Dijital Donusum Ofisi'nin web sayfasinda kisa aciklamalar disinda uzun suredir herhangi bir yeni icerik paylasimi yapilmis degil. 
+
+Bununla beraber bazi buyuk sehir belediyeleri OGD uygulamalari kapsaminda online Acik Veri Portallari olusturmus durumdalar. Istanbul, Izmir, Konya, Balikesir, Bursa Buyuksehir Belediyeleri birer Acik Veri Portalina sahipler. Bu kisa bilgi notunda da Izmir Buyuksehir Belediyesi'nin Acik Veri Portali'nda paylastigi bazi veri setlerini inceleyecek ve soz konusu verilerden hareketle ulusal ekonomiye ve fiyat hareketlerine dair bazi veri gorsellestirmelerinde bulunacagiz. Boylelikle Acik Veri uygulamalarinin ve Acik Veri Portallarinin ne kadar onemli olabilecegi konusunda bir fikir edinebilecegiz.
+
+# Izmir Buyuksehir Belediyesi Acik Veri Portali
+
+Izmir Buyuksehir Belediyesi [Açık Veri Portalı](https://acikveri.bizizmir.com/tr/)
+Ocak 2021'den beri faaliyette ve cesitli basliklarda yerelden uretilmis verileri Izmir'lilerin hizmetine sunuyor. Asagidaki sekil Izmir Acik Veri Portalinda yayinlanan veri basliklari ve veri miktarini gorsellestiriyor. 
+
+![Sekil 3: Izmir BSB Acik Veri Portali](C:/Users/firat/Desktop/Izmir_fiyatlar/figure3.png)
+
+Izmir BSB Ekonomi basligi altinda cok kiymetli ve detayli 2 veri seti yayinliyor. Bunlardan ilki [Balik Hal Fiyatlari](https://acikveri.bizizmir.com/tr/dataset/balik-hal-fiyatlari), digeri de [Sebze ve Meyve Hal Fiyatlari](https://acikveri.bizizmir.com/tr/dataset/sebze-ve-meyve-hal-fiyatlari). Her iki veri seti de gerek kapsami (176 cesit sebze ve meyve, 152 cesit balik fiyati), gerek frekansi (gunluk), gerekse de tarih araligi (2006'dan gunumuze) ile ekonomistlerin ilgisini ceken cok onemli veri setleri. Balik Hal fiyatlari 2007 yilindan baslayarak gunumuze kadar gelen gunluk bir veri seti. Izmir'de tuketilen her bir Balik turunun fiyati ve dahil olduklari gruplar (Balik, Ithal (Donuk), Kultur, Tatli Su) gunluk olarak veri setinde yer almakta. Yine Sebze ve Meyve Hal Fiyatlari verisi de Izmir'de hale gelen butun Sebze ve Meyveleri gunluk fiyatlarini ve dahil olduklari gruplari (Sebze, Meyve ve Ithal) icermekte. Her iki veri seti de Izmir'deki Sebze, Meyve ve Balik fiyatlarinin uzun donemli gelisimleri hakkinda onemli fikirler veriyor. 
+
+Burada cok da fazla kod vs. detaya girmeden soz konusu veri setleri ile yapilan interaktif veri gorsellestirmelerini sizlerle paylasmak istiyorum. Veri gorsellestirmede kullanilan Balik Hal Fiyatlari verisi yaklasik 292 bin, Sebze ve Meyve Hal Fiyatlari verisi de yaklasik 363 bin gozlem icermekte. Soz konusu gunluk verileri isim ve turlerine gore ay bazinda toplulastirarak 2006 yilindan itibaren ortalama fiyat degisimlerini gorsellestirelim.
+
+Once Sebze ve Meyve fiyatlari ile baslayalim.
+
+
+
+```{r warning=FALSE, echo=TRUE, message=FALSE, include=FALSE}
+df_merged <- read.csv("C:/Users/firat/Desktop/Izmir BSB/izmir/df_merged.csv")
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r include=FALSE}
+df_merged_a <- read.csv2("C:/Users/firat/Desktop/Izmir_fiyatlar/local_prices/df_merged_a.csv", sep = ",")
+df_merged_c <- read.csv2("C:/Users/firat/Desktop/Izmir_fiyatlar/local_prices/df_merged_c.csv", sep = ",")
+
+```
+
+
+
+
+```{r include=FALSE}
+df_merged_d <- df_merged %>% group_by(MAL_TURU, year, month)%>% summarize(m = mean(ORTALAMA_UCRET, na.rm = TRUE))
+```
+
+
+```{r include=FALSE}
+df_merged_a$m <- as.numeric(as.character(df_merged_a$m))
+df_merged_c$m <- as.numeric(as.character(df_merged_c$m))
+df_merged_d$m <- as.numeric(as.character(df_merged_d$m))
+df_merged_d$year <- as.numeric(as.integer(df_merged_d$year))
+df_merged_d$month <- as.numeric(as.integer(df_merged_d$month))
+```
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+x1 <- plot_ly(df_merged_a, x = ~year, y = ~m) %>%
+ # add_lines(color = ~ordered(MAL_ADI)) %>% 
+  add_lines(linetype = ~MAL_ADI)
+saveWidget(x1, "x1.html", selfcontained = F, libdir = "lib")
+```
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+x2 <- plot_ly(df_merged_c, x = ~year, y = ~m) %>%
+  add_lines(color = ~ordered(MAL_TURU)) 
+saveWidget(x2, "x2.html", selfcontained = F, libdir = "lib")
+
+```
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+
+x3 <- plot_ly(df_merged_d, x = ~month, y = ~m) %>%
+  add_lines(color = ~ordered(year))
+saveWidget(x3, "x3.html", selfcontained = F, libdir = "lib")
+
+
+x3
+```
+
+
+```{r message=FALSE, warning=FALSE}
+x1
+x2
+x3
+
+```
+
+Yukaridaki x1 grafigi 176 cesit farkli sebze ve meyve turunun fiyatlarindaki yillik ortalamalari gosteren cok zengin bir veri gorsellestirmesidir. Grafik interaktif olusturuldugu icin tek tek (istediginiz urunun uzerine gelerek mause ile cift tiklayarak ekleme yapabilirsiniz), grup halinde (cift tikladiktan sonra tek tek istediginiz urunleri ekleyerek gruplandirabilirsiniz), ya da topluca (tekrar cift tiklayarak) istenilen sebze ve meyve turunun gorsellestirilmesi mumkundur. Butun sebze ve meyve fiyatlarindaki yukselis kolayca gozlenmektedir.
+
+x2 grafigi ise x1'deki sebze ve meyvelerin "Sebze", "Meyve" ve "Ithal" gruplari altinda, daha toplulastirilmis bir gorsellestirmesini sunmaktadir. Boylelikle hangi mal grubunda fiyat artislari birbirini takip ediyor, hangi mal grubu ayrisiyor, bunu gorsel olarak tespit etmek mumkun olmaktadir. Sekilden de gorundugu gibi Ithal sebze ve meyve fiyatlarindaki yukari gidis, yerlilerden bir hayli fazla.
+
+x3 grafigi ise daha farkli bir gorsellestirme sunuyor. Yil icindeki sebze ve meyve gruplarindaki fiyat dalgalanmalari ay detayinda gorsellestirilmis durumda. Ustelik farkli yillar ayni anda secilerek yillar arasi aninda karsilastirma yapmak imkani sunmakta. Buna gore 2006'dan 2022'ye meyve fiyatlari 6 kat, sebze fiyatlari 5.3 kat, ithal sebze ve meyve fiyatlari ise 4.8 kat artmis gorunuyor. 
+
+
+Ayni gorsellestirmeyi Balik Hal fiyatlari icin de yapalim.
+
+```{r warning=FALSE, echo=TRUE, message=FALSE, include=FALSE}
+df_fish <- read.csv("C:/Users/firat/Desktop/fish_prices/df_fish.csv")
+```
+
+```{r warning=FALSE, echo=TRUE, message=FALSE, include=FALSE}
+df_fish_a <- df_fish %>% group_by(MAL_ADI, year)%>% summarize(m = mean(ORTALAMA_UCRET)) #Mal Adi'na gore gruplandirilip ortalamasi alinmis fiyakar
+
+df_fish_b <- df_fish %>% group_by(MAL_ADI, year) %>% filter(MAL_ADI =="AHTAPOT(DONUK)") %>% summarize(m = mean(ORTALAMA_UCRET))
+
+df_fish_c <- df_fish%>% group_by(MAL_TURU, year)%>% summarize(m = mean(ORTALAMA_UCRET, na.rm = TRUE))
+
+df_fish_d <- df_fish %>% group_by(MAL_TURU, year, month)%>% summarize(m = mean(ORTALAMA_UCRET, na.rm = TRUE))
+
+```
+
+```{r include=FALSE}
+df_fish_a
+df_fish_b
+df_fish_c
+df_fish_d
+```
+
+```{r message= FALSE, echo= FALSE, warning= FALSE, include=FALSE}
+f3 <- plot_ly(df_fish_d, x = ~month, y = ~m) %>%
+  add_lines(color = ~ordered(year))
+saveWidget(f3, "f3.html", selfcontained = F, libdir = "lib")
+```
+
+
+```{r message= FALSE, echo= FALSE, warning= FALSE, include=FALSE}
+f2 <- plot_ly(df_fish_c, x = ~year, y = ~m) %>%
+  add_lines(color = ~ordered(MAL_TURU)) 
+saveWidget(f2, "f2.html", selfcontained = F, libdir = "lib")
+
+```
+
+
+```{r message= FALSE, echo= FALSE, warning= FALSE, include=FALSE}
+f1 <- plot_ly(df_fish_a, x = ~year, y = ~m) %>%
+ # add_lines(color = ~ordered(MAL_ADI)) %>% 
+  add_lines(linetype = ~MAL_ADI)
+saveWidget(f1, "f1.html", selfcontained = F, libdir = "lib")
+```
+
+Asagidaki grafik de x1'e benzer sekilde Izmir Balik hali'ndeki her cesit deniz canlisinin yillik ortalama fiyatlarini tek tek, grup olarak ya da topluca gorsellestiriyor. Sekilden de goruldugu gibi balik fiyatlarindaki artis 2018'den sonra hiz kazaniyor. Peki bu fiyatlari Tatli Su, Kultur, Ithal ve Balik (=deniz) olarak gruplandirsak nasil bir sekille karsilasiriz? Asagidaki f2 grafigi de bu gruplandirmaya gore ortalama balik fiyatlarini gosteriyor.
+
+```{r message= FALSE, warning= FALSE}
+f1
+
+```
+
+
+f2 sekline gore 2016'ya kadar nispeten yatay seyreden balik fiyatlari 2016'dan sonra topluca ivme kazaniyor. Burada ozel olarak belli bir grubun digerlerinden ayristigini soyleyemiyoruz. Soz konusu artis topluca gerceklesmis. Sebze ve Meyve fiyatlarinin tersine Balik fiyatlarinda Ithal (Donuk) balik grubunun Deniz ve Kultur baliklarinda yasanan fiyat artislarinin altinda kaldigi goze carpiyor. Ve son olarak da yillar arasi karsilastirma yapabilmek icin f3 sekline goz atalim.
+```{r}
+f2
+```
+
+```{r}
+f3
+```
+
+f3'e bakildiginda fiyatlar arasindaki farklari yillar gectikce acildigi gozlenmekte. Ayrica Balik fiyatlari Sebze ve Meyve fiyatlariyla karsilastirilmayacak derecede, yaklasik 50-60 katlik bir artis yasamis 2007'den 2022'ye. Bu grafik ile bunu gozlemlemek oldukca mumkun.
+
+Butun grafiklar interaktif olarak gorsellestirilmis durumda. Legendlardan istenilen manipulasyonlar yapilabilmekte, hover ile veri etiketleri gorulebilmekte, istenilen donemin verilerine zoom yapilabilmekte ve istenirse grafikler manipulasyonlu ya da manipulasyonusuz olarak jpeg dosyasi formatinda indirilebilmektedir. 
+
+Soz konusu veriler pek cok acidan cok onemlidir. Ilk olarak veriler, Turkiye'de nadir bulunan Acik Yonetisim Verileri'ne Izmir'den bir ornek teskil etmektedir. Veriler, Izmir Belediyesi Veri Portalindan serbestce indirilebilmekte, herhangi bir lisans gerektirmeyen yazilimlarla manipule edilebilmekte ve gorsellestirilebilmektedir. Ayrica soz konusu veri, son gunlerde Turkiye'de cokca konusulan fiyat artislarindaki seyre dair Izmir yerelinden ornekler sunmaktadir. Bu verilerin TUIK'in Izmir icin ilan ettigi gida fiyat artislariyla karsilastirilmasi son gunlerde cokca tartisilan enflasyondaki seyre dair Izmir yerelinden yeni bir seyler soyleyebilir. 
+
+```{r message= FALSE, echo= FALSE, warning= FALSE, include=FALSE}
+ indexes <- read_excel("indexes.xlsx")
+# indexes
+```
+
+
+
+
+```{r message= FALSE, echo= FALSE, warning= FALSE, include=FALSE}
+p4 <- plot_ly(
+  data = indexes,
+  x = ~year,
+  y = ~TUIK_GIDA, 
+  name = "TUIK_GIDA",
+  type = "scatter",
+  mode = "lines",
+  line = list(width = 2, 
+              dash = "solid",
+              color = "green")) %>% 
+  add_trace(y = ~BALIK, name = "BALIK", mode = "lines", line = list(width = 4, dash = "dash", color = "gray"))%>% 
+  add_trace(y = ~SEBZE_MEYVE, name = "SEBZE_MEYVE", mode = "lines+markers", line = list(dash = "dot", color = "red"))
+saveWidget(p4, "p4.html", selfcontained = F, libdir = "lib")
+
+```
+
+P4 grafigi Izmir'deki sebze, meyve ve balik hal fiyatlari ile TUIK'in Izmir icin yayinladigi gida fiyatlarini 2007=100 baz alarak gorsellestiriyor. 
+
+```{r}
+p4
+```
+
+
+
+P4'e gore TUIK'in Izmir'e dair yayinladigi Gida Fiyatlarinda meydana gelen artis ortalama Sebze ve Meyve hal fiyatlarindaki artistan buyuk, Balik hal fiyatlarindaki artistan ise kucuktur. TUIK Gida Fiyatlarinin Balik Hal fiyatlari ile 2020 yilina kadar paralel gittigi, fakat 2020'den sonra ikisi arasindaki farkin giderek acildigi gozlenmekte. 2007 = 100 baza gore Izmir icin TUIK Gida fiyatlari 7.8 kat, balik hal fiyatlari ise 9.7 kat artmis gorunuyor. Butun fiyat gorsellestirmelerinde 2020'den sonraki bozulma dikkat cekici.  
+
+Bu kisa uygulama yazisinda hem OGD anlatilmis, hem de Izmir BSB'nin Acik Veri Portalindan alinan verilerle OGD'nin enflasyon gibi hayati bir konuda onemli bir veri kaynagi olabilecegi gosterilmistir. Kuskusuz OGD uygulamalarinin Turkiye capinda yayilmasi, yerel veri kaynaklarinin artmasina ve yurttaslarin veri okur yazarligina katkida bulunacaktir. 
+<br>
+<br>
+<br>
+
+
+
+
+
+
