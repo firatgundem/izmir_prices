@@ -33,18 +33,18 @@ library(htmlwidgets)
 library(readxl)
 ```
 
-# Acik Yonetisim Verisi (Open Government Data)
+# Açık Yönetişim Verisi (Open Government Data)
 
 Bu kısa bilgi notunda sizlere ülkemizdeki yerel yönetimleri de ilgilendiren Açık Yönetişim Verisi (Open Government Data, OGD) politikalarından ve uygulamalarından bahsedeceğim. Açık Yönetişim Verisi uygulamaları ABD Başkanı Barack Obama'nin 2009 yılında, Beyaz Ev'de geçirdiği ilk gününde imzaladığı Şeffaflık ve Açık Yönetişim Yasasına (Memorandum on Transparency and Open Government) dayanmaktadır. Şeffaflık, kamusal katilim ve işbirliği gibi kavramlar üzerine yükselen Açık Yönetişim Verisi yasası kısaca daha önce görülmemiş boyutlarda verinin (data) kişisel bilgilerden arındırılarak yurttaşların erişimine açılması olarak özetlenebilir. Açık Yönetişim Verisi uygulamalarının arkasında yatan mantık söz konusu verilerin, yurttaşlar ile yerel ve genel kamu otoriteleri arasında karşılıklı iletişimi kuvvetlendirmesi ve otoritelerin uyguladıkları politikalarda veri aracılığıyla yurttaş katılımının artırılmasıdır. Tabi beklenen etkinin ortaya çıkması için verinin nasıl paylaşılacağı önemlidir. Açık Yönetişim Verisi uygulamalarının başarıya ulaşabilmesi için verilerin bazı özellikleri taşıması gerekmektedir. 2009 yılında Açık Yönetişim Çalışma Grubu'na göre Açık Veri aşağıdaki özellikleri taşımalı:
 
-#### 1- Tam olmali (complete);
-#### 2- Oncelikli/Temel olmali (primary);
-#### 3- Guncel olmali (timely);
-#### 4- Erisilebilir olmali (accesible);
-#### 5- Makineler (bilgisayar vb.) tarafindan islenebilir olmali (machine-processable);
-#### 6- Ayrimci nitelikte olmamali (non-discriminatory);
-#### 7- Telif ile korunmamali, patentsiz olmali (non-proprietary);
-#### 8- Lisanssiz (bedava) olmali (licence-free);
+#### 1- Tam olmalı (complete);
+#### 2- Öncelikli/Temel olmalı (primary);
+#### 3- Güncel olmalı (timely);
+#### 4- Erişilebilir olmalı (accesible);
+#### 5- Makineler (bilgisayar vb.) tarafından işlenebilir olmalı (machine-processable);
+#### 6- Ayrımcı nitelikte olmamalı (non-discriminatory);
+#### 7- Telif ile korunmamalı, patentsiz olmalı (non-proprietary);
+#### 8- Lisanssız (bedava) olmalı (licence-free);
  
 Amerika'daki Açık Yönetişim Verisi uygulamaları kısa surede dünya çapında yaygınlık kazandı. Hem ulusal hem de yerel bazda kamu otoriteleri Açık Veri Portalları (Open Data Portal) aracılığıyla aklınıza gelebilecek pek çok veriyi kamuya açtılar. Söz konusu uygulamaların dünya çapındaki yayılımını görmek için aşağıdaki harita bir fikir vermektedir.
 
