@@ -1,7 +1,7 @@
 ---
 title: "Açık Yönetişim Verisi (Open Government Data) Uygulamaları ve İzmir’de Yerel Fiyatlar"
-author: "Firat Gundem"
-date: "3/20/2022"
+author: "Dr. Fırat Gündem"
+date: "4/25/2022"
 output:
   html_document: default
   pdf_document: default
@@ -35,7 +35,7 @@ library(readxl)
 
 # Açık Yönetişim Verisi (Open Government Data)
 
-Bu kısa bilgi notunda sizlere ülkemizdeki yerel yönetimleri de ilgilendiren Açık Yönetişim Verisi (Open Government Data, OGD) politikalarından ve uygulamalarından bahsedeceğim. Açık Yönetişim Verisi uygulamaları ABD Başkanı Barack Obama'nin 2009 yılında, Beyaz Ev'de geçirdiği ilk gününde imzaladığı Şeffaflık ve Açık Yönetişim Yasasına (Memorandum on Transparency and Open Government) dayanmaktadır. Şeffaflık, kamusal katilim ve işbirliği gibi kavramlar üzerine yükselen Açık Yönetişim Verisi yasası kısaca daha önce görülmemiş boyutlarda verinin (data) kişisel bilgilerden arındırılarak yurttaşların erişimine açılması olarak özetlenebilir. Açık Yönetişim Verisi uygulamalarının arkasında yatan mantık söz konusu verilerin, yurttaşlar ile yerel ve genel kamu otoriteleri arasında karşılıklı iletişimi kuvvetlendirmesi ve otoritelerin uyguladıkları politikalarda veri aracılığıyla yurttaş katılımının artırılmasıdır. Tabi beklenen etkinin ortaya çıkması için verinin nasıl paylaşılacağı önemlidir. Açık Yönetişim Verisi uygulamalarının başarıya ulaşabilmesi için verilerin bazı özellikleri taşıması gerekmektedir. 2009 yılında Açık Yönetişim Çalışma Grubu'na göre Açık Veri aşağıdaki özellikleri taşımalı:
+Bu kısa bilgi notunda sizlere ülkemizdeki yerel yönetimleri de ilgilendiren Açık Yönetişim Verisi (Open Government Data, OGD) politikalarından ve uygulamalarından bahsedeceğim. Açık Yönetişim Verisi uygulamaları ABD Başkanı Barack Obama'nin 2009 yılında, Beyaz Ev'de geçirdiği ilk gününde imzaladığı Şeffaflık ve Açık Yönetişim Yasasına (Memorandum on Transparency and Open Government) dayanmaktadır. Şeffaflık, kamusal katilim ve işbirliği gibi kavramlar üzerine yükselen Açık Yönetişim Verisi yasası kısaca daha önce görülmemiş boyutlarda verinin (data) kişisel bilgilerden arındırılarak yurttaşların erişimine açılması olarak özetlenebilir. Açık Yönetişim Verisi uygulamalarının arkasında yatan mantık söz konusu verilerin, yurttaşlar ile yerel ve genel kamu otoriteleri arasında karşılıklı iletişimi kuvvetlendirmesi ve otoritelerin uyguladıkları politikalarda veri aracılığıyla yurttaş katılımının artırılmasıdır. Tabi beklenen etkinin ortaya çıkması için verinin nasıl paylaşılacağı önemlidir. Açık Yönetişim Verisi uygulamalarının başarıya ulaşabilmesi için verilerin bazı özellikleri taşıması gerekmektedir. 2009 yılında Açık Yönetişim Çalışma Grubu'na göre Açık Veri aşağıdaki özellikleri taşımalı: 
 
 #### 1- Tam olmalı (complete);
 #### 2- Öncelikli/Temel olmalı (primary);
@@ -48,11 +48,11 @@ Bu kısa bilgi notunda sizlere ülkemizdeki yerel yönetimleri de ilgilendiren A
  
 Amerika'daki Açık Yönetişim Verisi uygulamaları kısa surede dünya çapında yaygınlık kazandı. Hem ulusal hem de yerel bazda kamu otoriteleri Açık Veri Portalları (Open Data Portal) aracılığıyla aklınıza gelebilecek pek çok veriyi kamuya açtılar. Söz konusu uygulamaların dünya çapındaki yayılımını görmek için aşağıdaki harita bir fikir vermektedir.
 
-![Sekil 1: Dunyada Acik Yonetisim Verisi](C:/Users/firat/Desktop/Izmir_fiyatlar/figure1.png)
+![Şekil 1: Dunyada Acik Yonetisim Verisi](C:/Users/firat/Desktop/Izmir_fiyatlar/figure1.png)
 
-Bununla beraber Açık Yönetişim Verisi uygulamalarından beklenen etkinin ortaya çıkabilmesi için paylaşılan verinin formatı önemli. Yukarıda da bahsedilen 4., 7., ve 8. maddeler veri formatının taşıması gereken özellikleri özetliyor. Bu çerçevede indirilen verinin tamamen lisans gerektirmeyen yazılımlar (Python, R, UnixShell, vb.) aracılığıyla işlenebilir olması gerekiyor. Sekil 2 ABD'de Açık Yönetişim Verisi uygulamaları bağlamında paylaşılan verilerin formatlarına dair bizlere bir fikir veriyor.
+Bununla beraber Açık Yönetişim Verisi uygulamalarından beklenen etkinin ortaya çıkabilmesi için paylaşılan verinin formatı önemli. Yukarıda da bahsedilen 4., 7., ve 8. maddeler veri formatının taşıması gereken özellikleri özetliyor. Bu çerçevede indirilen verinin tamamen lisans gerektirmeyen yazılımlar (Python, R, UnixShell, vb.) aracılığıyla işlenebilir olması gerekiyor. Şekil 2 ABD'de Açık Yönetişim Verisi uygulamaları bağlamında paylaşılan verilerin formatlarına dair bizlere bir fikir veriyor.
 
-![Sekil 2: Acik Yonetisim Veri Formatlari](C:/Users/firat/Desktop/Izmir_fiyatlar/figure2.png)
+![Şekil 2: Acik Yonetisim Veri Formatlari](C:/Users/firat/Desktop/Izmir_fiyatlar/figure2.png)
 
 Şekil 2'den de görüldüğü gibi OGD kapsamında paylaşılan verilerin büyük çoğunluğunu .csv, .json, .xml gibi lisans gerektirmeyen, bedava (free) formatlar oluşturuyor. Bu görsel, OGD'den beklenen etkinin ortaya çıkması için gösterilen özene bir kanıt sunuyor. Bugün gerek ABD'de, gerekse de Avrupa'da OGD uygulamaları neticesinde yurttaşlar, üniversiteler ve yerel ve kamu otoritelerinin işbirliğine dayalı pek çok gelişme yaşanıyor. Bu gelişmeler kentsel sorunlar için açık veriye dayalı çözümlerden yurttaşlar tarafından geliştirilen veri bazlı uygulamaların açık veri partallarında paylaşılmasına, açık verilerin üniversiteler tarafından Büyük Veri (Big Data) ve Makine Öğrenmesi (Machine Learning) uygulamaları için kullanılmasına kadar geniş bir alana yayılıyor. Dolayısıyla OGD uygulamaları veri bazlı politika ve veri bilimi açısından geniş bir potansiyeli bünyesinde barındırıyor.
 
@@ -65,62 +65,276 @@ Bununla beraber bazı büyükşehir belediyeleri OGD uygulamaları kapsamında o
 # İzmir Büyükşehir Belediyesi Açık Veri Portali
 
 İzmir Büyükşehir Belediyesi [Açık Veri Portalı](https://acikveri.bizizmir.com/tr/)
-Ocak 2021'den beri faaliyette ve çeşitli baslıklarda yerelden üretilmiş verileri İzmirlilerin hizmetine sunuyor. Aşağıdaki sekil İzmir Açık Veri Portalı’nda yayınlanan veri başlıkları ve veri miktarını görselleştiriyor.
+Ocak 2021'den beri faaliyette ve çeşitli başlıklarda yerelden üretilmiş verileri İzmirlilerin hizmetine sunuyor. Aşağıdaki şekil İzmir Açık Veri Portalı’nda yayınlanan veri başlıkları ve veri miktarını görselleştiriyor.
 
-![Sekil 3: Izmir BSB Acik Veri Portali](C:/Users/firat/Desktop/Izmir_fiyatlar/figure3.png)
+![Şekil 3: İzmir BSB Açık Veri Portalı](C:/Users/firat/Desktop/Izmir_fiyatlar/figure3.png)
 
-İzmir BSB Ekonomi başlığı altında çok kıymetli ve detaylı 2 veri seti yayınlıyor. Bunlardan ilki [Balık Hal Fiyatları](https://acikveri.bizizmir.com/tr/dataset/balik-hal-fiyatlari), diğeri de [Sebze ve Meyve Hal Fiyatları](https://acikveri.bizizmir.com/tr/dataset/sebze-ve-meyve-hal-fiyatlari). Her iki veri seti de gerek kapsamı (176 çeşit sebze ve meyve, 152 çeşit balık fiyatı), gerek frekansı (günlük), gerekse de tarih aralığı (2006'dan günümüze) ile ekonomistlerin ilgisini çeken çok önemli veri setleri. Balık Hal fiyatları 2007 yılından başlayarak günümüze kadar gelen günlük bir veri seti. İzmir’de tüketilen her bir Balık turunun fiyatı ve dahil oldukları gruplar (Balık, İthal (Donuk), Kültür, Tatlı Su) günlük olarak veri setinde yer almakta. Yine Sebze ve Meyve Hal Fiyatları verisi de İzmir’de Sebze ve Meyve haline gelen bütün sebze ve meyvelerin günlük fiyatlarını ve dahil oldukları grupları (Sebze, Meyve ve İthal) içermekte. Her iki veri seti de İzmir’deki Sebze, Meyve ve Balık fiyatlarının uzun dönemli gelişimleri hakkında önemli fikirler veriyor. 
+Şekil 3'e göre İzmir BŞB veri portalında bulunan verilerin büyük bir çoğunluğu ulaşım, çevre, yaşam gibi İzmirlilerin gündelik hayatlarında önemli yer tutan başlıklara ayrılmış durumda. Bu İzmirde yaşayan bireylerin hayat kalitesinin veriye bazlı artırılması anlamında olumlu bir adım. Öte yandan söz konusu verilerin OGD kapsamında yer alabilmesi için veri formatlarının da bedava (free), lisans gerektirmeyecek (licence-free) şekilde herhangi bir bilgisayar ortamında işlenebilir (machine readable) olması gerekmekte. Bu nedenle İzmir BŞB Veri Portalındaki verileri bir de türlerine göre görselleştirmek önemli.
 
-Burada çok da fazla kodlama vb. gibi detaylara girmeden söz konusu veri setleri ile yapılan interaktif veri görselleştirmelerini sizlerle paylaşmak istiyorum. Veri görselleştirmede kullanılan Balık Hal Fiyatları verisi yaklaşık 292 bin, Sebze ve Meyve Hal Fiyatları verisi de yaklaşık 363 bin gözlem içermekte. Söz konusu günlük verileri isim ve türlerine göre ay bazında toplulaştırarak 2006 yılından itibaren ortalama fiyat değişimlerini görselleştirelim.
+![Şekil 4: İzmir BSB Açık Veri Portalı Veri Formatları](C:/Users/firat/Desktop/Izmir_fiyatlar/figure4.png)
 
-Önce Sebze ve Meyve fiyatları ile başlayalım.
+Şekil 4'e göre İzmir BŞB Açık Veri Portalındaki veri formatlarında ilk iki sırayı bedava ve bilgisayar ortamında okunabilir olan API ve CSV (comma separated value) veri formatları almakta. Öte yandan üçüncü sıra ise lisans gerektiren Excel formatına ait. Bu İzmir BŞB'nin OGD politikaları doğrultusunda katedecek adımları olduğunu ama yine de durumun hiç de fena olmadığını gösteriyor.
 
 
+# R ile Bir Uygulama: İzmir BSB Açık Veri Portalı
 
-```{r warning=FALSE, echo=TRUE, message=FALSE, include=FALSE}
+
+Bu short tutorial'da İzmir BSB Açık Veri Portalı'ndaki bazı veriler kullanılarak R'da veri görselleştirme uygulamaları anlatılacaktır. Böylelikle OGD uygulamalarının gundelik hayat üzerindeki potansiyel etkilerine bir örnek sunulmuş olacaktır. 
+
+İzmir BSB Açık Veri Portalı Ekonomi başlığı altında çok kıymetli ve detaylı 2 veri seti yayınlıyor. Bunlardan ilki [Balık Hal Fiyatları](https://acikveri.bizizmir.com/tr/dataset/balik-hal-fiyatlari), diğeri de [Sebze ve Meyve Hal Fiyatları](https://acikveri.bizizmir.com/tr/dataset/sebze-ve-meyve-hal-fiyatlari). Her iki veri seti de gerek kapsamı (176 çeşit sebze ve meyve, 152 çeşit balık fiyatı), gerek frekansı (günlük), gerekse de tarih aralığı (2006'dan günümüze) ile ekonomistlerin ilgisini çeken çok önemli veri setleri. Balık Hal fiyatları 2007 yılından başlayarak günümüze kadar gelen günlük bir veri seti. İzmir’de tüketilen her bir Balık türünün fiyatı ve dahil oldukları gruplar (Balık, İthal (Donuk), Kültür, Tatlı Su) günlük olarak veri setinde yer almakta. Yine Sebze ve Meyve Hal Fiyatları verisi de İzmir’de Sebze ve Meyve haline gelen bütün sebze ve meyvelerin günlük fiyatlarını ve dahil oldukları grupları (Sebze, Meyve ve İthal) içermekte. Her iki veri seti de İzmir’deki Sebze, Meyve ve Balık fiyatlarının uzun dönemli gelişimleri hakkında önemli fikirler veriyor. 
+
+Burada R programında söz konusu veri setleri ile yapılan interaktif veri görselleştirmelerini sizlerle paylaşmak istiyorum. Böylelikle OGD uygulamalarının ne gibi somut çıktılara dönüşebileceğine dair de bir örnek olacak elimizde. 
+
+Veri görselleştirmede kullanılan Balık Hal Fiyatları verisi yaklaşık 292 bin, Sebze ve Meyve Hal Fiyatları verisi de yaklaşık 363 bin gözlem içermekte. Söz konusu günlük verileri isim ve türlerine göre ay bazında toplulaştırarak 2006 yılından itibaren ortalama fiyat değişimlerini görselleştirmek amaç.
+
+Önce Sebze ve Meyve fiyatları ile başlayalım. Sebze ve Meyve fiyatlarının API bilgilerine [buradan](https://acikveri.bizizmir.com/dataset/sebze-ve-meyve-hal-fiyatlari) ulaşabiliyoruz. API ile veri çekmek bir kaç açıdan faydalı. İlk olarak veriyi bilgisayarımızda depolamadan direkt olarak R ortamına almış oluyoruz. İkinci olarak da sonraki çalışmalarımızda veriyi otomatik olarak güncelleyebilme imkanına kavuşuyoruz. Bu çerçevede API kullanarak aşağıdaki kodlar yardımıyla verileri alalım:
+
+
+```{r}
+df_2006 <- fromJSON("https://acikveri.bizizmir.com/tr/api/3/action/datastore_search?resource_id=e835ebff-854e-44fd-aa86-1c848667b0bf&limit=18066")
+
+df_2007 <- fromJSON("https://acikveri.bizizmir.com/tr/api/3/action/datastore_search?resource_id=7f52e6bd-5703-44dc-a6eb-5c75c5b320c9&limit=19098")
+
+df_2008 <- fromJSON("https://acikveri.bizizmir.com/tr/api/3/action/datastore_search?resource_id=86e95268-d3ba-49a8-aabb-a65c34196ca0&limit=18762")
+
+df_2009 <- fromJSON("https://acikveri.bizizmir.com/tr/api/3/action/datastore_search?resource_id=32a0bd10-219b-4956-81c3-c0cb685a4a40&limit=19468")
+
+df_2010 <- fromJSON("https://acikveri.bizizmir.com/tr/api/3/action/datastore_search?resource_id=77bbb16c-6bb9-4170-b372-df8c0301aeb0&limit=19016")
+
+df_2011 <- fromJSON("https://acikveri.bizizmir.com/tr/api/3/action/datastore_search?resource_id=3636e47f-0a36-4289-8040-ca7ed379d8b4&limit=19520")
+
+df_2012 <- fromJSON("https://acikveri.bizizmir.com/tr/api/3/action/datastore_search?resource_id=baead829-03bc-4fa7-957f-ee67071bffe5&limit=19614")
+
+df_2013 <- fromJSON("https://acikveri.bizizmir.com/tr/api/3/action/datastore_search?resource_id=cc50986f-6c8c-4675-b9ae-e00c2651d99b&limit=19580")
+
+df_2014 <- fromJSON("https://acikveri.bizizmir.com/tr/api/3/action/datastore_search?resource_id=7d5e0201-ded3-419a-9921-23842ab0d036&limit=20382")
+
+df_2015 <- fromJSON("https://acikveri.bizizmir.com/tr/api/3/action/datastore_search?resource_id=244681aa-f233-41c6-8c3e-342950335364&limit=23749")
+
+df_2016 <- fromJSON("https://acikveri.bizizmir.com/tr/api/3/action/datastore_search?resource_id=f2d0e815-d460-4dc2-94c6-2e32019875d5&limit=26417")
+
+df_2017 <- fromJSON("https://acikveri.bizizmir.com/tr/api/3/action/datastore_search?resource_id=64f5a293-9899-41de-9662-06af483a21de&limit=26880")
+
+df_2018 <- fromJSON("https://acikveri.bizizmir.com/tr/api/3/action/datastore_search?resource_id=38148e33-6d8c-4a14-a41c-f80313e9b787&limit=27299")
+
+df_2019 <- fromJSON("https://acikveri.bizizmir.com/tr/api/3/action/datastore_search?resource_id=acc05e47-91ba-47ce-8f09-0aa07eaad400&limit=27063")
+
+df_2020 <- fromJSON("https://acikveri.bizizmir.com/tr/api/3/action/datastore_search?resource_id=bcfea2e8-5032-417e-9374-21370694fd32&limit=26161")
+
+df_2021 <- fromJSON("https://acikveri.bizizmir.com/tr/api/3/action/datastore_search?resource_id=6776dba0-7299-47d6-b301-db3e2f88bb53&limit=26759")
+
+df_2022 <- fromJSON("https://acikveri.bizizmir.com/tr/api/3/action/datastore_search?resource_id=d8830ad5-8e33-4fa1-b14f-596b17ac33ed&limit=8024")
+```
+
+
+Yukarıdaki API kodları ile İzmir Sebze ve Meyve halindeki bütün fiyatları indirmiş olduk. Şimdi de data frame oluşturmak için API içindeki bizim için gerekli bilgileri aşağıdaki kodları kullanarak çekelim.
+
+
+```{r}
+df_2006<- as.data.frame(df_2006[['result']][['records']])
+
+df_2007<- as.data.frame(df_2007[['result']][['records']])
+
+df_2008<- as.data.frame(df_2008[['result']][['records']])
+
+df_2009<- as.data.frame(df_2009[['result']][['records']])
+
+df_2010<- as.data.frame(df_2010[['result']][['records']])
+
+df_2011<- as.data.frame(df_2011[['result']][['records']])
+
+df_2012<- as.data.frame(df_2012[['result']][['records']])
+
+df_2013<- as.data.frame(df_2013[['result']][['records']])
+
+df_2014<- as.data.frame(df_2014[['result']][['records']])
+
+df_2015<- as.data.frame(df_2015[['result']][['records']])
+
+df_2016<- as.data.frame(df_2016[['result']][['records']])
+
+df_2017<- as.data.frame(df_2017[['result']][['records']])
+
+df_2018<- as.data.frame(df_2018[['result']][['records']])
+
+df_2019<- as.data.frame(df_2019[['result']][['records']])
+
+df_2020<- as.data.frame(df_2020[['result']][['records']])
+
+df_2021<- as.data.frame(df_2021[['result']][['records']])
+
+df_2022<- as.data.frame(df_2022[['result']][['records']])
+
+```
+
+Bu kodlar API ile çektiğimiz verilerde bizim ilgilendiğimiz bilgilerin yer aldığı kısımları dışa aktarmamıza yarıyor. Ardından da bütün verileri tek bir dosya olarak birleştirelim.
+
+
+```{r}
+df_merged <- rbind(df_2006, df_2007, df_2008, df_2009, df_2010, df_2011, df_2012, df_2013, df_2014, df_2015, df_2016, df_2017, df_2018, df_2019, df_2020, df_2021, df_2022)
+```
+
+Burada df_merged adını verdiğimiz veri dosyamızı aşağıdaki kodla bilgisayarımıza kaydedebiliriz.
+
+
+```{r warning=FALSE, message=FALSE}
 df_merged <- read.csv("C:/Users/firat/Desktop/Izmir BSB/izmir/df_merged.csv")
 ```
 
+Şimdi df_merged isimli veri dosyamızı tanıyalım
+
+```{r}
+str(df_merged)
+```
+
+Göründüğü gibi, verilerimizi birleştirmiş olduk. Söz konusu veriler 8 değişkenden ve 365.851 satırdan oluşmakta. Oldukça büyük bir veri seti. Ayrıca verilerden sadece _id sütunu integer, diğerleri ise character formatında. Burada sonraki analizler için yapılması faydalı iki işlem bulunmakta. İlk olarak df_merged verimizdeki TARIH sütununu daha sonraki veri görselleştirmelerde kullanabilmek amacıyla DATE haline, sonra da özellikle ASGARI_UCRET, AZAMI_UCRET ve ORTALAMA_UCRET verilerini numeric hale getirelim.
+
+```{r}
+df_merged$TARIH <- as.Date(df_merged$TARIH)
+
+df_merged$ORTALAMA_UCRET <- as.numeric(sub(",", ".", df_merged$ORTALAMA_UCRET))
+
+df_merged$ASGARI_UCRET <- as.numeric(sub(",", ".", df_merged$ASGARI_UCRET))
+
+df_merged$AZAMI_UCRET <- as.numeric(sub(",", ".", df_merged$AZAMI_UCRET))
+```
+
+Ve verimizi tekrar kontrol edelim
+
+```{r}
+str(df_merged)
+```
+
+İstediğimiz dönüşümlerin olduğunu gözlemliyoruz. Hemen burada basitçe ne gibi özellikleri olan bir veri setimiz olduğunu anlamak için aşağıdaki dplyr kütüphanesi komutu olan count fonksiyonunu kullanarak kaç tane MAL_ADI'na sahip olduğumuzu görelim.
+
+```{r}
+df_merged %>% count(MAL_ADI)
+```
+
+Yukarıdaki kod bize toplamda 177 farklı mal adı olduğunu ve her bir mal adındaki gözlem sayısını veriyor. Söz gelimi bütün veri setinde 4503 Ananas, 3136 Armut Deveci, 4300 Avakado verisi olduğunu görüyoruz. Bunların fiyat verisi olduğunu hatırda tutalım. 
+
+Burada yapılması gereken önemli bir işlem de az önce DATE haline getirdiğimiz TARIH sütunu gün, ay ve yıl olarak ayrıştırmak. Bu daha sonraki veri görselleştirmelerde verileri toplulaştırmamıza yarayacak. Bunu lubridate fonksiyonuyla yapabiliriz.
+
+```{r}
+df_merged <- df_merged %>%
+  mutate(year = lubridate::year(TARIH), 
+         month = lubridate::month(TARIH), 
+         day = lubridate::day(TARIH))
+head(df_merged)
+```
+
+Gördüğünüz gibi her bir gözlem, yıl, ay ve gün detayına ayrışmış durumda. Bu veriyi bu şekilde kaydedelim. Sonrasında bu veriyi uygun görselleştirme yöntemlerine göre gruplandırmaya başlayacağız. 
+
+```{r}
+write.csv(df_merged, file = 'C:/Users/firat/Desktop/Izmir BSB/izmir/df_merged.csv', row.names = FALSE)
+```
+
+Verimizi kaydettikten sonra veri görselleştirme için hangi gruplandırmaların daha iyi sonuçlar vereceğini düşünelim. Verimizi oncelikle MAL_ADI'na göre gruplandırmak mantıklı olabilir. Böylelikle MAL_ADI'na göre ORTALAMA_UCRET'te meydana gelen değişimi zamana bağlı olarak görselleştirebiliriz. Bu gruplandırmadan elde edeceğimiz veri setine df_merged_a diyelim.
+
+```{r}
+df_merged_a <- df_merged %>% group_by(MAL_ADI, year)%>% summarize(m = mean(ORTALAMA_UCRET))
+df_merged_a
+```
+
+
+Yukarıda 2097 farklı mal adı için yıl bazında ORTALAMA_ÜCRET verisi yer almakta. Bu veriyi rahatlıkla ggplot kütüphanesi ile görselleştirebiliriz. 
+
+
+```{r}
+df_merged_a %>% ggplot(aes(x=year, y=m, group_by=MAL_ADI))+
+  geom_line()
+```
+
+Yukarıdaki grafik Sebze ve Meyve fiyatlarının yukarı yönlü hareketi hakkında birşeyler söylemekte, ancak hangi mal gruplarının ne yönde hareket ettiği konusunda bilgi vermemektedir. Şimdilik bu görselleştirmeyi geçelim ve başka türlü veri gruplandırmalar üzerine düşünelim. Mesela spesifik olarak belli MAL_ADI'larını görselleştirebiliriz. 
+
+```{r}
+df_merged_b <- df_merged %>% group_by(MAL_ADI, year) %>% filter(MAL_ADI == "KAYISI  MALATYA") %>% summarize(m = mean(ORTALAMA_UCRET))
+
+df_merged_b %>%
+  ggplot( aes(x=year, y=m, group=MAL_ADI, color=MAL_ADI)) +
+    geom_line(size=1)+
+    ggtitle("Izmir Gida Fiyatlari") +
+  scale_x_continuous(breaks = c(2006, 2008, 2010, 2012, 2014, 2016, 2018, 2020, 2022))+
+    ylab("Fiyatlar (TRY)")
+
+```
+
+
+Yukarıdaki şekil de İzmir Sebze ve MEyve Hali'ndeki Malatya Kayısı'nın ORTALAMA_UCRET'indeki değişimi göstermekte. Bu da gayet bilgilendirici bir görsel, istediğimiz mal isimlerini filter(MAL_ADI == "") komutunun içine yazarak görselleştirebiliriz. Öte yandan bu yöntem toplu olarak bütün Meyve ce Sebze Fiyatlarındaki değişimi içermiyor. Bu durumda ne yapılabilir? 
+
+Aslında her bir MAL_ADI'ni kendi içinde gruplandırabilirsek biraz daha bilgilendirici bir görsel elde etmiş oluruz. df_merged veri setimize tekrar bakalım.
+
+```{r}
+str(df_merged)
+```
+
+
+
+Burada MAL_TURU sütunu bütün verileri Meyve, Sebze vb. gibi gruplara ayırmış. Gelin MAL_TURU'na daha yakından bakalım.
+
+```{r}
+df_merged %>% count(MAL_TURU)
+```
+
+Buradan elimizdeki bütün Sebze ve Meyvelerin Ithal, Meyve ve Sebze olarak gruplandırıldığını görüyoruz. O zamn bir sonraki gruplandırmamızı MAL_TURU'ne göre yapalım, bu veri setine df_merged_c adını verelim ve görselleştirelim.
+
+```{r}
+df_merged_c <- df_merged %>% group_by(MAL_TURU, year)%>% summarize(m = mean(ORTALAMA_UCRET))
+
+
+df_merged_c %>%
+  ggplot( aes(x=year, y=m, group=MAL_TURU, color=MAL_TURU)) +
+    geom_line(size=1)+
+    ggtitle("Izmir Gida Fiyatlari") +
+  scale_x_continuous(breaks = c(2006, 2008, 2010, 2012, 2014, 2016, 2018, 2020, 2022))+
+    ylab("Fiyatlar (TRY)") 
+
+```
+
+Yukarıdaki şekil Sebze ve Meyve ORTALAMA_UCRET'lerindeki yıllık değişimi gözler önüne seriyor. Daha da detaylı bir gösterim söz konusu değişimi aylık bazda görselleştirmek olabilir. Bunun için veri setimizi aylı baza çevirelim ve adında da df_merged_d diyelim. 
+
 
 ```{r include=FALSE}
-df_merged_a <- read.csv2("C:/Users/firat/Desktop/Izmir_fiyatlar/local_prices/df_merged_a.csv", sep = ",")
-df_merged_c <- read.csv2("C:/Users/firat/Desktop/Izmir_fiyatlar/local_prices/df_merged_c.csv", sep = ",")
+# df_merged_a <- read.csv2("C:/Users/firat/Desktop/Izmir_fiyatlar/local_prices/df_merged_a.csv", sep = ",")
+# df_merged_c <- read.csv2("C:/Users/firat/Desktop/Izmir_fiyatlar/local_prices/df_merged_c.csv", sep = ",")
 
 ```
 
 
 
 
-```{r include=FALSE}
+```{r}
 df_merged_d <- df_merged %>% group_by(MAL_TURU, year, month)%>% summarize(m = mean(ORTALAMA_UCRET, na.rm = TRUE))
+
+df_merged_d
 ```
+Böylelikle verilerimizi aylık baza çevirmiş olduk. Şimdiye kadar yaptığımız görselleştirmeler statik görselleştirmeler olduğu için elde ettiğimiz bilgiler de statik bilgiler. Bu görselleştirmelerde acaba daha çok hangi ürünün fiyatında artış olmuş, hangileri azalmış ya da hangi zaman aralığında artışlar hız kazanmış gibi sorulara cevap veremiyoruz. Öte yandan bu görselleştirmelerin okuyucu ile iletişimi de görselden okuyucuya tek yönlü olarak gerçekleşmiş. Acaba söz konusu verileri daha interaktif bir şekilde görselleştirme imkanımız var mıdır? plotly kütüphanesi bunun için geliştirilmiş, veriyi görsel üzerinde manipüle etmeye imkan veren bir paket. Gelin plotly ile neler yapabileceğimize bir göz atalım.
 
-
-```{r include=FALSE}
-df_merged_a$m <- as.numeric(as.character(df_merged_a$m))
-df_merged_c$m <- as.numeric(as.character(df_merged_c$m))
-df_merged_d$m <- as.numeric(as.character(df_merged_d$m))
-df_merged_d$year <- as.numeric(as.integer(df_merged_d$year))
-df_merged_d$month <- as.numeric(as.integer(df_merged_d$month))
-```
-
-```{r message=FALSE, warning=FALSE, include=FALSE}
+```{r message=FALSE, warning=FALSE}
 x1 <- plot_ly(df_merged_a, x = ~year, y = ~m) %>%
  # add_lines(color = ~ordered(MAL_ADI)) %>% 
   add_lines(linetype = ~MAL_ADI)
 saveWidget(x1, "x1.html", selfcontained = F, libdir = "lib")
+
+x1
 ```
 
 
-```{r message=FALSE, warning=FALSE, include=FALSE}
+
+Yukarıdaki x1 grafiği 176 çeşit farklı sebze ve meyve turunun fiyatlarındaki yıllık ortalamaları gösteren çok zengin bir veri görselleştirmesidir. Grafik interaktif oluşturulduğu için tek tek (istediğiniz ürünün üzerine gelerek mouse ile çift tıklayarak ekleme yapabilirsiniz), grup halinde (çift tıkladıktan sonra tek tek istediğiniz ürünleri ekleyerek gruplandırabilirsiniz), ya da topluca (tekrar çift tıklayarak) istenilen sebze ve meyve turunun görselleştirilmesi mümkündür. Bütün sebze ve meyve fiyatlarındaki yükseliş kolayca gözlenmektedir.Bu haliyle bu görselleştirme yukarıda ilk siyah-beyaz olarak görselleştirilen df_merged_a görselleştirmesinden interaktif versiyonundan başka bir şey değildir. Öte yandan Bu görselleştirme, sağ üstte yer alan menü kullanılarak manipüle edilebilmektedir. Plotly ile görselleştirmeye oluşturduğumuz diğer veri setleri ile devam edelim.
+
+```{r message=FALSE, warning=FALSE}
 x2 <- plot_ly(df_merged_c, x = ~year, y = ~m) %>%
   add_lines(color = ~ordered(MAL_TURU)) 
 saveWidget(x2, "x2.html", selfcontained = F, libdir = "lib")
 
+
+x2
 ```
 
+Bu görselin de yukarıda statik versiyonunu görselleştirmiştik. Bu gorsel ise bir yukarıdaki görseldeki sebze ve meyvelerin "Sebze", "Meyve" ve "Ithal" grupları altında, daha toplulaştırılmış bir görselleştirmesini sunmaktadır. Böylelikle hangi mal grubunda fiyat artışları birbirini takip ediyor, hangi mal grubu ayrışıyor, bunu görsel olarak tespit etmek mümkün olmaktadır. Şekilden de görüldüğü gibi İthal sebze ve meyve fiyatlarındaki yukarı gidiş, yerlilerden bir hayli fazla. 
 
-```{r message=FALSE, warning=FALSE, include=FALSE}
+```{r message=FALSE, warning=FALSE}
 
 x3 <- plot_ly(df_merged_d, x = ~month, y = ~m) %>%
   add_lines(color = ~ordered(year))
@@ -130,19 +344,17 @@ saveWidget(x3, "x3.html", selfcontained = F, libdir = "lib")
 x3
 ```
 
+Yukarıdaki interaktif görsel ise daha farklı bir görselleştirme sunuyor. Yıl içindeki sebze ve meyve gruplarındaki fiyat dalgalanmaları ay detayında görselleştirilmiş durumda. Üstelik farklı yıllar aynı anda seçilerek yıllar arası anında karşılaştırma yapma imkân sunmakta. Buna göre İzmir’de 2006'dan 2022'ye meyve fiyatları 6 kat, sebze fiyatları 5.3 kat, ithal sebze ve meyve fiyatları ise 4.8 kat artmış görünüyor. 
 
-```{r message=FALSE, warning=FALSE}
-x1
-x2
-x3
 
+```{r include=FALSE}
+# df_merged_a$m <- as.numeric(as.character(df_merged_a$m))
+# df_merged_c$m <- as.numeric(as.character(df_merged_c$m))
+# df_merged_d$m <- as.numeric(as.character(df_merged_d$m))
+# df_merged_d$year <- as.numeric(as.integer(df_merged_d$year))
+# df_merged_d$month <- as.numeric(as.integer(df_merged_d$month))
 ```
 
-Yukarıdaki x1 grafiği 176 çeşit farklı sebze ve meyve turunun fiyatlarındaki yıllık ortalamaları gösteren çok zengin bir veri görselleştirmesidir. Grafik interaktif oluşturulduğu için tek tek (istediğiniz ürünün üzerine gelerek mouse ile çift tıklayarak ekleme yapabilirsiniz), grup halinde (çift tıkladıktan sonra tek tek istediğiniz ürünleri ekleyerek gruplandırabilirsiniz), ya da topluca (tekrar çift tıklayarak) istenilen sebze ve meyve turunun görselleştirilmesi mümkündür. Bütün sebze ve meyve fiyatlarındaki yükseliş kolayca gözlenmektedir.
-
-x2 grafiği ise x1'deki sebze ve meyvelerin "Sebze", "Meyve" ve "Ithal" grupları altında, daha toplulaştırılmış bir görselleştirmesini sunmaktadır. Böylelikle hangi mal grubunda fiyat artışları birbirini takip ediyor, hangi mal grubu ayrışıyor, bunu görsel olarak tespit etmek mümkün olmaktadır. Şekilden de görüldüğü gibi İthal sebze ve meyve fiyatlarındaki yukarı gidiş, yerlilerden bir hayli fazla.
-
-x3 grafiği ise daha farklı bir görselleştirme sunuyor. Yıl içindeki sebze ve meyve gruplarındaki fiyat dalgalanmaları ay detayında görselleştirilmiş durumda. Üstelik farklı yıllar aynı anda seçilerek yıllar arası anında karşılaştırma yapma imkân sunmakta. Buna göre İzmir’de 2006'dan 2022'ye meyve fiyatları 6 kat, sebze fiyatları 5.3 kat, ithal sebze ve meyve fiyatları ise 4.8 kat artmış görünüyor. 
 
 
 Ayni görselleştirmeyi Balık Hal fiyatları için de yapalım.
@@ -169,6 +381,7 @@ df_fish_b
 df_fish_c
 df_fish_d
 ```
+
 
 ```{r message= FALSE, echo= FALSE, warning= FALSE, include=FALSE}
 f3 <- plot_ly(df_fish_d, x = ~month, y = ~m) %>%
@@ -200,7 +413,7 @@ f1
 ```
 
 
-f2 sekline göre 2016'ya kadar nispeten yatay seyreden balık fiyatları 2016'dan sonra topluca ivme kazanıyor. Burada özel olarak belli bir grubun diğerlerinden ayrıştığını söyleyemiyoruz. Söz konusu artış topluca gerçekleşmiş. Sebze ve Meyve fiyatlarının tersine Balık fiyatlarında İthal (Donuk) balık grubunun Deniz ve Kültür balıklarında yaşanan fiyat artışlarının altında kaldığı göze çarpıyor. Ve son olarak da yıllar arası karşılaştırma yapabilmek için f3 sekline göz atalım.
+f2 şekline göre 2016'ya kadar nispeten yatay seyreden balık fiyatları 2016'dan sonra topluca ivme kazanıyor. Burada özel olarak belli bir grubun diğerlerinden ayrıştığını söyleyemiyoruz. Söz konusu artış topluca gerçekleşmiş. Sebze ve Meyve fiyatlarının tersine Balık fiyatlarında İthal (Donuk) balık grubunun Deniz ve Kültür balıklarında yaşanan fiyat artışlarının altında kaldığı göze çarpıyor. Ve son olarak da yıllar arası karşılaştırma yapabilmek için f3 sekline göz atalım.
 
 ```{r}
 f2
@@ -214,7 +427,9 @@ f3'e bakıldığında fiyatlar arasındaki farkların yıllar geçtikçe açıld
 
 Bütün grafikler interaktif olarak görselleştirilmiş durumda. Legendlardan istenilen manipülasyonlar yapılabilmekte, hover ile veri etiketleri görülebilmekte, istenilen donemin verilerine zoom yapılabilmekte ve istenirse grafikler manipülasyonlu ya da manipülasyonsuz olarak .png formatında indirilebilmektedir. 
 
-Söz konusu veriler pek çok açıdan önemlidir. İlk olarak veriler, Türkiye’de nadir bulunan Açık Yönetişim Verilerine İzmir’den bir örnek teşkil etmektedir. Veriler, İzmir Büyükşehir Belediyesi Veri Portalı’ndan serbestçe indirilebilmekte, herhangi bir lisans gerektirmeyen yazılımlarla manipüle edilebilmekte ve görselleştirilebilmektedir. Ayrıca söz konusu veri, son günlerde Türkiye’de çokça konuşulan fiyat artışlarındaki seyre dair İzmir yerelinden örnekler sunmaktadır. Bu verilerin TUIK'in İzmir için ilan ettiği gıda fiyat artışlarıyla karşılaştırılması son günlerde çokça tartışılan enflasyondaki seyre dair İzmir yerelinden yeni bir şeyler söyleyebilir.
+Söz konusu veriler pek çok açıdan önemlidir. İlk olarak veriler, Türkiye’de nadir bulunan Açık Yönetişim Verilerine İzmir’den bir örnek teşkil etmektedir. Veriler, İzmir Büyükşehir Belediyesi Veri Portalı’ndan serbestçe indirilebilmekte, herhangi bir lisans gerektirmeyen yazılımlarla manipüle edilebilmekte ve görselleştirilebilmektedir. Ayrıca söz konusu veri, son günlerde Türkiye’de çokça konuşulan fiyat artışlarındaki seyre dair İzmir yerelinden örnekler sunmaktadır. 
+
+Bilindiği gibi TÜİK enflasyon sepetine dahil ettiği ürünleri ve bu ürünlerin fiyatlarındaki gelişimi NUTS 2 düzeyinde ve aylık olarak yayınlamaktadır. İlgililer [bu](https://data.tuik.gov.tr/Kategori/GetKategori?p=Enflasyon-ve-Fiyat-106) adresten aylık bazda bölgesel fiyatlara ulaşabilir. Peki TÜİK'in Sebze ve Meyve ve Balık fiyatları verileri ile İzmir Açık Veri Portalı'nda yer alan aynı veriler arasında nasıl bir ilişki vardır? İzmir Açık Veri Portalındaki verilerin TÜİK'in İzmir için topladığı sebze, meyve ve balık fiyatlarıyla karşılaştırılması son günlerde çokça tartışılan enflasyondaki seyre dair İzmir yerelinden yeni ve önemli birşeyler söyleyebilir. Şimdi şu ana kadar üzerinde çalıştığımız bütün veri setindeki ORTALAMA_UCRET verisini yıllık ortalamalara çevirelim ve TÜİK'in İzmir'den topladığı ürünlerin yıllık ortalamalarıyla karşılaştıralım.
 
 
 ```{r message= FALSE, echo= FALSE, warning= FALSE, include=FALSE}
@@ -225,24 +440,27 @@ Söz konusu veriler pek çok açıdan önemlidir. İlk olarak veriler, Türkiye�
 
 
 
-```{r message= FALSE, echo= FALSE, warning= FALSE, include=FALSE}
+```{r message= FALSE, echo= TRUE, warning= FALSE}
 p4 <- plot_ly(
   data = indexes,
   x = ~year,
-  y = ~TUIK_GIDA, 
-  name = "TUIK_GIDA",
+  y = ~TUIK_GIDA,
+  name = "TÜİK GIDA",
   type = "scatter",
   mode = "lines",
   line = list(width = 2, 
               dash = "solid",
               color = "green")) %>% 
-  add_trace(y = ~BALIK, name = "BALIK", mode = "lines", line = list(width = 4, dash = "dash", color = "gray"))%>% 
-  add_trace(y = ~SEBZE_MEYVE, name = "SEBZE_MEYVE", mode = "lines+markers", line = list(dash = "dot", color = "red"))
+  add_trace(y = ~TUIK_BALIK, name = "TUIK_BALIK") %>% 
+  add_trace(y = ~TUIK_SEBMEY, name = "TUIK_SEBMEY") %>% 
+  add_trace(y = ~IZM_BALIK, name = "IZM_BALIK", mode = "lines", line = list(width = 4, dash = "dash", color = "gray"))%>% 
+  add_trace(y = ~IZM_SEBMEY, name = "IZM_SEBMEY", mode = "lines+markers", line = list(dash = "dot", color = "red")) %>% 
+  add_trace(y = ~Izmir_GIDA, name = "Izmir_GIDA", mode = "lines+markers", line = list(dash = "dot", color = "red"))
 saveWidget(p4, "p4.html", selfcontained = F, libdir = "lib")
 
 ```
 
-P4 grafiği İzmir’deki sebze, meyve ve balık hal fiyatları ile TUIK'in İzmir için yayınladığı gıda fiyatlarını 2007=100 baz alarak görselleştiriyor.
+P4 grafiği İzmir’deki sebze, meyve ve balık hal fiyatları ile TÜİK'in İzmir için yayınladığı gıda fiyatlarını 2007=100 baz alarak interaktif bir şekilde görselleştiriyor.
 
 ```{r}
 p4
@@ -250,9 +468,9 @@ p4
 
 
 
-P4'e göre TUIK'in İzmir’e dair yayınladığı Gıda Fiyatlarında meydana gelen artış ortalama Sebze ve Meyve hal fiyatlarındaki artıştan büyük, Balık hal fiyatlarındaki artıştan ise küçüktür. TUIK Gıda Fiyatlarının Balık Hal fiyatları ile 2020 yılına kadar paralel gittiği, fakat 2020'den sonra ikisi arasındaki farkın giderek açıldığı gözlenmekte. 2007 = 100 baza göre İzmir için TUIK Gıda fiyatları 7.8 kat, balık hal fiyatları ise 9.7 kat artmış görünüyor. Bütün fiyat görselleştirmelerinde 2020'den sonraki bozulma dikkat çekici.  
+P4 grafiği R'daki plotly kütüphanesi ile oluşturulduğu için interaktif olarak verileri seçmeye izin veriyor. Analizimize İzmir BŞB Veri Portalındaki Sebze ve Meyve Fiyatları verisinin TÜİK versiyonunu karşılaştırarak başlayalım. Yandaki legend istediğimiz verileri seçmemize izin verecektir. Buna göre TÜİK'in İzmir’e dair yayınladığı ortalama Sebze ve Meyve fiyatlarında meydana gelen artış İzmir BŞB Veri Portalındaki ortalama Sebze ve Meyve hal fiyatlarındaki artıştan büyüktür. 2007 = 100 baza göre İzmir Sebze ve Meyve Hal fiyatları 2022 itibariyle ortalama 4.8 kat artmışken, TÜİK'e göre 5.6 kat artmıştır. Devam edelim. Peki Balık fiyatları için durum nedir? Yandaki legenddan balık fiyatları seçildiğinde ise arada ciddi bir fark oluşmaktadır. Şekle göre TÜİK'in İzmirden topladığı ortalama balık fiyatları İzmir Balık Hal fiyatlarının daima gerisinde kalmıştır. 2019 yılındaki yakınlaşmayı saymazsak söz konusu fark 2022 itibariyle maksimum seviyesine ulaşmıştır. 2007 = 100 baza göre İzmir Balık hal fiyatları 11.9 kat artmışken, TÜİK'e göre artış 8.9 kattır. İzmir gibi balık tüketiminin önemli olduğu bir kentte balık fiyatlarındaki gerçek değişimi enflasyon hesaplamalarına yansıtmak önemlidir. Daha sağlıklı bir karşılaştırma her iki gıda gurubunun ortalamalarına dayalı bir gıda fiyatları karşılaştırması olabilir. Interaktif şeklimiz buna izin vermektedir. TUIK_GIDA ve İZMİR_GIDA şekillerini seçerek TÜİK ve İzmir BŞB Açık Veri Portalında yayınlanan fiyatlar arasında bir karşılaştırma yapma olanağımız var. Buna göre İzmir BŞB Açık Veri Portalından elde edilen fiyatların nispeten yüksek seyretmesine rağmen genelde her iki değişkenin de 2021 yılına birbirine yakın seyrettiği görünmekte. Ancak iki seri arasındaki fark 2022 itibariyle açılmakta ve İzmir'in yerel fiyatlarının TÜİK'in fiyatlarının üstüne çıktığı görünüyor. Bu özellikle son yıllarda tartışmalı enflasyon oranları açıklayan TÜİK'in veri toplama yöntemi ile ilgili kuşkulara İzmir yerelinden bir örnek teşkil ediyor. 
 
-Bu kısa uygulama yazısında hem OGD anlatılmış hem de İzmir Büyükşehir Belediyesinin Açık Veri Portalı’ndan alınan verilerle OGD'nin enflasyon gibi hayati bir konuda nasıl önemli bir veri kaynağı olabileceği gösterilmiştir. Kuskusuz OGD uygulamalarının Türkiye çapında yaygınlık kazanması, yerel veri kaynaklarının artmasına ve yurttaşların veri okur yazarlığına katkıda bulunacaktır.
+Bu kısa uygulama yazısında hem OGD uygulamalarını anlatmaya hem de İzmir Büyükşehir Belediyesinin Açık Veri Portalı’ndan alınan verilerle OGD'nin enflasyon gibi hayati bir konuda nasıl önemli bir veri kaynağı olabileceğine dair bir kısa alıştırma yapmış olduk. Bu bağlamda gerek OGD uygulamalarının Türkiye çapında yaygınlık kazanması, gereksede yerel veri kaynaklarının artması, yurttaşların veri okur yazarlığına katkıda bulunacak ve en basitinden enflasyon gibi hayati konularda gerçeği sınamaya yönelik yeni imkanlar yaratacaktır. 
 
 <br>
 <br>
